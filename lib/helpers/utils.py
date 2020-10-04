@@ -66,7 +66,7 @@ def log_msg(msg, loglevel=xbmc.LOGDEBUG):
         if isinstance(msg, unicode):
             msg = msg.encode('utf-8')
     if loglevel == xbmc.LOGDEBUG and FORCE_DEBUG_LOG:
-        loglevel = xbmc.LOGNOTICE
+        loglevel = xbmc.LOGINFO
     xbmc.log("%s --> %s" % (ADDON_ID, msg), level=loglevel)
 
 
@@ -100,7 +100,7 @@ def rate_limiter(rl_params):
         log_msg(
             "Rate limiter active for %s - delaying request with %s seconds - "
             "Configure a personal API key in the settings to get rid of this message and the delay." %
-            (rl_name, sec_to_wait), xbmc.LOGNOTICE)
+            (rl_name, sec_to_wait), xbmc.LOGINFO)
         while sec_to_wait and not monitor.abortRequested():
             monitor.waitForAbort(1)
             # keep setting the timestamp to create some sort of queue
@@ -710,7 +710,7 @@ def refresh_image(imagepath):
     """tell kodi texture cache to refresh a particular image"""
     import sqlite3
     if sys.version_info.major == 3:
-        dbpath = xbmc.translatePath("special://database/Textures13.db")
+        dbpath = xbmcvfs.translatePath("special://database/Textures13.db")
     else:
         dbpath = xbmc.translatePath("special://database/Textures13.db").decode('utf-8')
     connection = sqlite3.connect(dbpath, timeout=30, isolation_level=None)
