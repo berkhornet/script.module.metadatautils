@@ -447,7 +447,7 @@ class MusicArtwork(object):
 
     def manual_set_music_artwork(self, details, mediatype):
         """manual override artwork options"""
-        from utils import manual_set_artwork
+        from .utils import manual_set_artwork
         if mediatype == "artist" and "artist" in details:
             header = "%s: %s" % (xbmc.getLocalizedString(13511), details["artist"])
         else:
