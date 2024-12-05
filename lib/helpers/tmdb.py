@@ -206,13 +206,15 @@ class Tmdb(object):
             # addon provided or personal api key
             params["api_key"] = self.api_key
             rate_limit = None
-            expiration = datetime.timedelta(days=7)
+            # MJR001: days changed from 7 to minimise refresh for IPTV Player lookups
+            expiration = datetime.timedelta(days=999)
         else:
             # fallback api key (rate limited !)
             params["api_key"] = "80246691939720672db3fc71c74e0ef2"
             # without personal (or addon specific) api key = rate limiting and older info from cache
             rate_limit = ("themoviedb.org", 5)
-            expiration = datetime.timedelta(days=60)
+            # MJR001: days changed from 60 to minimise refresh for IPTV Player lookups
+            expiration = datetime.timedelta(days=999)
         cachestr = "tmdb.%s" % params.values()
         cache = self.cache.get(cachestr)
         if cache:
